@@ -1,4 +1,7 @@
+/bin
 .classpath
 .project
 target/
-my.build.properties
+test-output/
+selenium-ant/my.build.properties
+src/test/xml/

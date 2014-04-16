@@ -1,27 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>net.sf.seleniumjt</groupId>
-	<artifactId>seleniumjt-core</artifactId>
-	<version>1.2</version>
-
-	<name>${project.groupId}:${project.artifactId}</name>
-	<description>SeleniumJT is a Selenium2 wrapper framework that simplifies the coding required for getting you tests up and running fast. In addition to encapsulating the idiosyncrasies of Selenium WebDriver it also supplies a more reliable testing framework for dynamic web pages by allowing elements time for conditions to be met before failure, times that are fully customisable.</description>
-	<url>https://sourceforge.net/projects/seleniumjt/</url>
-
-	<licenses>
-		<license>
-			<name>MIT License</name>
-			<url>http://www.opensource.org/licenses/mit-license.php</url>
-		</license>
-	</licenses>
-
-	<developers>
-		<developer>
-			<name>Dave Hampton</name>
-			<email>davehampton67@gmail.com</email>
-		</developer>
-	</developers>
+	<groupId>com.rdfgroup.selenium</groupId>
+	<artifactId>SeleniumJT-Framework</artifactId>
+	<version>1.0</version>
 
 	<properties>
 
@@ -32,12 +14,18 @@
 
 		<!-- Spring -->
 		<spring-framework.version>3.2.3.RELEASE</spring-framework.version>
+		<seleniumjt-version>1.2-SNAPSHOT</seleniumjt-version>
 		<selenium-version>2.41.0</selenium-version>
-		<phantomjsdriver-version>1.1.0</phantomjsdriver-version>
 
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>net.sf.seleniumjt</groupId>
+			<artifactId>seleniumjt-core</artifactId>
+			<version>${seleniumjt-version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -51,9 +39,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.detro.ghostdriver</groupId>
-			<artifactId>phantomjsdriver</artifactId>
-			<version>${phantomjsdriver-version}</version>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-server</artifactId>
+			<version>${selenium-version}</version>
 		</dependency>
 
 		<dependency>
@@ -65,58 +53,96 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.2</version>
+			<version>2.4</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjtools</artifactId>
-			<version>1.7.4</version>
-		</dependency>
 
+		<!-- Test Artifacts -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>6.1.1</version>
 		</dependency>
 
-	</dependencies>
-	<distributionManagement>
-		<repository>
-			<uniqueVersion>false</uniqueVersion>
-			<id>rdfrepo</id>
-			<name>Corporate Repository</name>
-			<url>http://btn-vsvr-repo/nexus/content/repositories/releases/</url>
-			<layout>default</layout>
-		</repository>
-	</distributionManagement>
+		<!-- CUCUMBER-JVM -->
 
+		<dependency>
+			<groupId>com.github.detro.ghostdriver</groupId>
+			<artifactId>phantomjsdriver</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-picocontainer</artifactId>
+			<version>1.1.5</version>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-testng</artifactId>
+			<version>1.1.5</version>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>1.1.5</version>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>1.1.5</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+
+	</dependencies>
+	<repositories>
+
+		<repository>
+			<id>sonatype</id>
+			<url>https://oss.sonatype.org/content/groups/public/</url>
+		</repository>
+
+	</repositories>
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resource</directory>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.8</version>
 				<executions>
 					<execution>
-						<id>attach-sources</id>
+						<id>unpack</id>
+						<phase>package</phase>
 						<goals>
-							<goal>jar</goal>
+							<goal>unpack</goal>
 						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>net.sf.seleniumjt</groupId>
+									<artifactId>seleniumjt-core</artifactId>
+									<version>${seleniumjt-version}</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>target/jtcore</outputDirectory>
+									<destFileName>optional-new-name.jar</destFileName>
+									<includes>**/*.exe, **/*.tpl</includes>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
 	</build>
+
+
 </project>
