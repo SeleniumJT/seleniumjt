@@ -14,8 +14,8 @@
 
 		<!-- Spring -->
 		<spring-framework.version>3.2.3.RELEASE</spring-framework.version>
-		<seleniumjt-version>1.2</seleniumjt-version>
-		<selenium-version>2.41.0</selenium-version>
+		<seleniumjt-version>1.2.1</seleniumjt-version>
+		<selenium-version>2.39.0</selenium-version>
 
 	</properties>
 
@@ -66,11 +66,6 @@
 
 		<!-- CUCUMBER-JVM -->
 
-		<dependency>
-			<groupId>com.github.detro.ghostdriver</groupId>
-			<artifactId>phantomjsdriver</artifactId>
-			<version>1.0.3</version>
-		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-picocontainer</artifactId>
