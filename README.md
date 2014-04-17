@@ -12,5 +12,12 @@ for dynamic web pages by allowing elements time for conditions to be met before 
 <li>Supports JUnit & Cucumber</li>
 <li>Utilises the PageObject pattern.</li>
 </ul>
-
-
+<h3>Prerequisites</h3>
+<ul>
+<li>Maven is installed</li>
+<li>You will need to install the TestNG Eclipse plugin http://testng.org/doc/eclipse.html if you want to use TestNG</li>
+<ul>
+<h2>Installation</h2>
+You can clone this project and run the sample tests provided straight out of the box. You can then use this project as a basis for 
+writing your own tests following the comprehensive guide at
+https://github.com/davehampton/seleniumjt/blob/master/docs/SeleniumJT%20User%20guide.docx?raw=true
