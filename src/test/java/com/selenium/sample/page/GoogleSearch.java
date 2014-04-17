@@ -5,6 +5,10 @@ import java.io.IOException;
 import com.jt.selenium.SeleniumJT;
 import com.jt.selenium.page.PageObject;
 
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
 /**
  * 
  * This is a very simple PageObject.
@@ -18,11 +22,22 @@ public class GoogleSearch extends PageObject {
 		super(test);
 	}
 
-	public void firstTest() throws IOException {
+	public void openGoogle() throws Exception {
+
 		test.open("/");
-		test.type("gbqfq", "RDF Group");
+	}
+
+	public void typeValue(String value) throws Exception {
+
+		test.type("gbqfq", value);
 		test.pause(2000);
-		test.verifyTextPresent("Offering a complete portfolio of IT services");
+	}
+	
+
+	public void checkResult(String value) throws Exception {
+
+		test.verifyTextPresent(value);
+		test.stop();
 	}
 
 }

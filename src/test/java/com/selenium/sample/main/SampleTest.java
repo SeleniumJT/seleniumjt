@@ -1,7 +1,5 @@
 package com.selenium.sample.main;
 
-import java.io.IOException;
-
 import org.testng.annotations.Test;
 
 import com.jt.selenium.testng.SeleniumTestNG;
@@ -20,11 +18,14 @@ import com.selenium.sample.page.GoogleSearch;
 public class SampleTest extends SeleniumTestNG {
 
 	@Test
-	public void test() throws IOException {
+	public void test() throws Exception {
 		/**
 		 * This is calling a PageObject and delegates the testing to it.
 		 */
-		new GoogleSearch(test).firstTest();
+		GoogleSearch googleSearch = new GoogleSearch(test);
+		googleSearch.openGoogle();
+		googleSearch.typeValue("RDF Group");
+		googleSearch.checkResult("Offering a complete portfolio of IT services");
 	}
 
 }

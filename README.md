@@ -11,6 +11,7 @@ for dynamic web pages by allowing elements time for conditions to be met before 
 <li>Integrated with TestNG</li>
 <li>Supports JUnit & Cucumber</li>
 <li>Utilises the PageObject pattern.</li>
+<li>Easily integrated with Jenkins</li>
 </ul>
 <h3>Prerequisites</h3>
 <ul>
